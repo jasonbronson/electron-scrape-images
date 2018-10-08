@@ -4,6 +4,7 @@
   "description": "Scrapes for images off a url",
   "main": "index.js",
   "dependencies": {
+    "bootstrap": "^4.1.3",
     "crawler": "^1.2.0",
     "electron": "^3.0.3",
     "nodejs": "^0.0.0"

@@ -21,8 +21,70 @@ app.on('ready', function(){
     
 })
 
-const mainMenuTemplate = [
+function createNewProject(){
+    alert('new project triggered');
+}
+
+let mainMenuTemplate = [
+
     {
-        label: 'File'
+        label: 'File',
+        submenu: [{
+            label: 'Create New Project',
+            click(){
+                createNewProject();
+            }
+        },
+        {
+            label: 'Quit',
+            accelerator: process.platform == 'darwin',
+            click(){
+                app.quit();
+            }
+        }
+    ]
+    },
+    {
+        label: 'Edit',
+        submenu: [
+            {role: 'cut'},
+            {role: 'copy'},
+            {role: 'paste'}
+        ]
+    },
+    {
+        label: 'View',
+        submenu: [
+            {role: 'reload'},
+            {role: 'forcereload'},
+            {role: 'toggledevtools'},
+        ]
+    },
+    ,
+    {
+      role: 'window',
+      submenu: [
+        {role: 'minimize'},
+        {role: 'close'}
+      ]
+    },
+    {
+      role: 'help',
+      submenu: [
+        {
+          label: 'Learn More',
+          click () { require('electron').shell.openExternal('https://github.com/jasonbronson/electron-scrape-images') }
+        }
+      ]
     }
+
 ];
+
+//Do this before adding for darwin 
+if(process.env.NODE_ENV == 'production'){
+    mainMenuTemplate.splice(2, 1);
+}
+
+if(process.platform == 'darwin'){
+    mainMenuTemplate.unshift({});
+}
