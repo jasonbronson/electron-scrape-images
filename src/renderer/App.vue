@@ -1,12 +1,15 @@
 <template>
   <div id="app">
+    <side-bar></side-bar>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'scrape-images'
+  import SideBar from './components/SideBar'
+  export default { 
+    name: 'scrape-images',
+    components: { SideBar }
   }
 </script>
 
