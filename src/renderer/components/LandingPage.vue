@@ -21,7 +21,8 @@
                   <div class="form-group">
                         <label class="control-label col-sm-5" for="input">Directory to save images </label>
                         <div class="col-sm-7">
-                            <button id="edit-project-save" type="button" class="btn btn-default ">Choose Directory</button>
+                            <button type="button" @click="directory" class="btn btn-default ">Choose Directory</button>
+                            <p>{{getDirectory}}</p>
                         </div>
                     </div>
                   <hr>
@@ -40,6 +41,8 @@
 </template>
 
 <script>
+
+const {dialog} = require('electron').remote
   export default {
     name: 'landing-page',
     data() {
@@ -47,7 +50,27 @@
         version: ".01"
       }
     },
+    computed: {
+      getDirectory() {
+        return this.$store.directoryPath
+      }
+    },
     methods: {
+      directory () {
+      
+        dialog.showOpenDialog( {
+          properties: ['openDirectory']
+        },
+        (directory) => {
+          if(directory === undefined){
+            console.log("no dir selected");
+          }else{
+            console.log(directory);
+            this.$store.commit('SET_DIRECTORY_PATH', directory);
+          }
+        })
+        
+      },
       open (link) {
         this.$electron.shell.openExternal(link)
       }

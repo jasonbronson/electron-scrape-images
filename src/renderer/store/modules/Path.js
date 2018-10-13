@@ -1,20 +1,17 @@
 const state = {
-  main: 0
+  directoryPath: "test"
 }
 
 const mutations = {
-  DECREMENT_MAIN_COUNTER (state) {
-    state.main--
-  },
-  INCREMENT_MAIN_COUNTER (state) {
-    state.main++
+  SET_DIRECTORY_PATH (state, value) {
+    state.directoryPath = value
   }
 }
 
 const actions = {
   someAsyncTask ({ commit }) {
     // do something async
-    commit('INCREMENT_MAIN_COUNTER')
+    commit('SET_DIRECTORY_PATH')
   }
 }
 
