@@ -1,34 +1,52 @@
 <template>
-  <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
-    <main>
-      <div class="left-side">
-        <side-bar></side-bar>
-      </div>
+      
+     <div class="col-md-9 ml-sm-auto col-lg-10 px-4 pt-5">
+    <!-- Page Content  -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-heading">
+                    <h3 class="card-title"> Welcome to image parser {{ version }} </h3>
+                </div>
+                <div class="card-body">
 
-      <div class="right-side">
-        <div class="doc">
-          <div class="title">Getting Started</div>
-          <p>
-            electron-vue comes packed with detailed documentation that covers everything from
-            internal configurations, using the project structure, building your application,
-            and so much more.
-          </p>
-          <button @click="open('https://simulatedgreg.gitbooks.io/electron-vue/content/')">Read the Docs</button><br><br>
+                    <form id="edit-project" class="form-horizontal col-md-12 fv-form fv-form-bootstrap" role="form" data-fv-framework="bootstrap" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh" novalidate="novalidate">
+                    
+                    <div class="form-group">
+                        <label class="control-label col-sm-5" for="inputUrl">URL to parse </label>
+                        <div class="col-sm-7">
+                            <input class="col-lg-12" name="url" placeholder="https://www.example.com" type="text" value="">
+                        </div>
+                    </div>
+                  <div class="form-group">
+                        <label class="control-label col-sm-5" for="input">Directory to save images </label>
+                        <div class="col-sm-7">
+                            <button id="edit-project-save" type="button" class="btn btn-default ">Choose Directory</button>
+                        </div>
+                    </div>
+                  <hr>
+                        <div class="form-group">
+                            <div class="col-sm-offset-0 col-sm-2">
+                                <button id="edit-project-save" type="button" class="btn btn-default ">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <div class="doc">
-          <div class="title alt">Other Documentation</div>
-          <button class="alt" @click="open('https://electron.atom.io/docs/')">Electron</button>
-          <button class="alt" @click="open('https://vuejs.org/v2/guide/')">Vue.js</button>
-        </div>
-      </div>
-    </main>
-  </div>
+    </div>
+</div>
+   
 </template>
 
 <script>
   export default {
     name: 'landing-page',
+    data() {
+      return {
+        version: ".01"
+      }
+    },
     methods: {
       open (link) {
         this.$electron.shell.openExternal(link)

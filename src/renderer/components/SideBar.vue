@@ -8,19 +8,19 @@
         <ul class="nav flex-column">
             <li class="nav-item active">
               <router-link to="/dashboard" class="nav-link">
-                  <i class="fas fa-home"></i>
+                  <font-awesome-icon icon="home" />
                   Dashboard
               </router-link>
             </li>
            <li class="nav-item">
              <router-link to="/control" class="nav-link">
-                  <i class="fas fa-project-diagram"></i>
-                  Control
+                  <font-awesome-icon icon="coffee" />
+                  Empty
              </router-link>
             </li> 
           <li class="nav-item">
                 <router-link to="/settings" class="nav-link">
-                  <i class="fas fa-cogs"></i>
+                  <font-awesome-icon icon="cogs" />
                   Settings
                 </router-link>
             </li>   
