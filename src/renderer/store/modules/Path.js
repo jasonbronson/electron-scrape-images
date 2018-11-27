@@ -4,9 +4,7 @@ const state = {
 
 const mutations = {
   setDirectoryPath (state, value) {
-    //console.log("commit" + value)
     state.directoryPath = value
-    //console.log("commit after value -- " + state.directoryPath)
   }
 }
 
@@ -18,7 +16,7 @@ const actions = {
 }
 
 const getters = {
-  getDirectoryPath (){
+  getDirectoryPath (state){
     return state.directoryPath
   }
 }
