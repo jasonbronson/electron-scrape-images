@@ -1,22 +1,31 @@
 const state = {
-  directoryPath: "test"
+  directoryPath: ""
 }
 
 const mutations = {
-  SET_DIRECTORY_PATH (state, value) {
+  setDirectoryPath (state, value) {
+    //console.log("commit" + value)
     state.directoryPath = value
+    //console.log("commit after value -- " + state.directoryPath)
   }
 }
 
 const actions = {
   someAsyncTask ({ commit }) {
     // do something async
-    commit('SET_DIRECTORY_PATH')
+    commit('setDirectoryPath')
+  }
+}
+
+const getters = {
+  getDirectoryPath (){
+    return state.directoryPath
   }
 }
 
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 }

@@ -22,7 +22,7 @@
                         <label class="control-label col-sm-5" for="input">Directory to save images </label>
                         <div class="col-sm-7">
                             <button type="button" @click="directory" class="btn btn-default ">Choose Directory</button>
-                            <p>{{getDirectory}}</p>
+                            <p>{{getDirectory}}**</p>
                         </div>
                     </div>
                   <hr>
@@ -51,8 +51,10 @@ const {dialog} = require('electron').remote
       }
     },
     computed: {
-      getDirectory() {
-        return this.$store.directoryPath
+      getDirectory () {
+        console.log('******');
+        console.log(this.$store.getDirectoryPath);
+        return this.$store.getDirectoryPath
       }
     },
     methods: {
@@ -65,8 +67,8 @@ const {dialog} = require('electron').remote
           if(directory === undefined){
             console.log("no dir selected");
           }else{
-            console.log(directory);
-            this.$store.commit('SET_DIRECTORY_PATH', directory);
+            //console.log(directory);
+            this.$store.commit('setDirectoryPath', directory);
           }
         })
         
