@@ -54,9 +54,9 @@ let mainMenuTemplate = [
   {
       label: 'File',
       submenu: [{
-          label: 'Create New Project',
+          label: 'Do Nothing',
           click(){
-              console.log('Fire new project');
+              console.log('Do nothing');
           }
       },
       {

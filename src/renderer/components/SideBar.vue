@@ -2,22 +2,22 @@
   <!-- Sidebar  -->
     <nav class="col-md-2 d-none d-md-block sidebar">
         <div class="sidebar-header">
-          <div class="col-md-8 title">TESTHEADER</div>
+          <div class="col-md-8 title">...</div>
         </div>
 
         <ul class="nav flex-column">
             <li class="nav-item active">
               <router-link to="/dashboard" class="nav-link">
                   <font-awesome-icon icon="home" />
-                  Dashboard
+                  Parse
               </router-link>
             </li>
-           <li class="nav-item">
+           <!--li class="nav-item">
              <router-link to="/control" class="nav-link">
                   <font-awesome-icon icon="coffee" />
                   Empty
              </router-link>
-            </li> 
+            </li--> 
           <li class="nav-item">
                 <router-link to="/settings" class="nav-link">
                   <font-awesome-icon icon="cogs" />

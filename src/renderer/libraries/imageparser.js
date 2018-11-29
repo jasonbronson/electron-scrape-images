@@ -1,11 +1,12 @@
 //https://www.npmjs.com/package/crawler
-//import Crawler from 'crawler';
-export default class Imageparser {
+import Crawler from 'crawler';
+import store from '../store'
+export default class imageparser {
 
     constructor(){
         var Crawler = require("crawler");
         var url;
-        this.uri ="https://pokermasters.dev/";
+        var dir;
     }
     set uri(value){
         this.url = value;
@@ -18,7 +19,10 @@ export default class Imageparser {
     }
     runCrawl(){
 
-        
+        this.dir = store.getters.getDirectoryPath.toString();
+        //get the url to parse
+        this.uri = store.getters.getUri.toString();
+
         var c = new Crawler({
             maxConnections : 10,
             // This will be called for each crawled page

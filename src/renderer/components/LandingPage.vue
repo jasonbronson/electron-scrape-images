@@ -6,18 +6,11 @@
         <div class="container-fluid">
             <div class="card">
                 <div class="card-heading">
-                    <h3 class="card-title"> Welcome to image parser {{ version }} </h3>
+                    <h3 class="card-title"> Welcome to Image Parser </h3>
                 </div>
                 <div class="card-body">
 
                     <form id="edit-project" class="form-horizontal col-md-12 fv-form fv-form-bootstrap" role="form" data-fv-framework="bootstrap" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh" novalidate="novalidate">
-                    
-                    <p v-if="errors.length">
-                      <b>Please correct the following error(s):</b>
-                      <ul>
-                        <li v-for="error in errors">{{ error }}</li>
-                      </ul>
-                    </p>
                     
                     <div class="form-group">
                         <label class="control-label col-sm-5" for="inputUrl">URL to parse </label>
@@ -35,7 +28,7 @@
                   <hr>
                         <div class="form-group">
                             <div class="col-sm-offset-0 col-sm-2">
-                                <button id="edit-project-save" type="button" class="btn btn-default" @click="save">Save</button>
+                                <button id="edit-project-save" type="button" class="btn btn-default" @click="run">Run</button>
                             </div>
                         </div>
                     </form>
@@ -49,14 +42,14 @@
 
 <script>
 
+import imageparser from '../libraries/imageparser'
 const {dialog} = require('electron').remote
   export default {
     name: 'landing-page',
     data() {
       return {
-        url: "",
-        version: ".01",
-        errors: [],
+        url: "https://cr.dev",
+        version: ".01"
       }
     },
     computed: {
@@ -66,19 +59,29 @@ const {dialog} = require('electron').remote
     },
     methods: {
 
-      save() {
+      run() {
           this.errors = [];
 
           if (!this.url) {
             this.errors.push('Url required.');
+            return;
           } else if (!this.validUrl(this.url)) {
             this.errors.push('Valid URL required.');
+            return;
           }
-        //this.errors = [];
-        console.log(this.url);
-        console.log('**' + this.$store.getters.getDirectoryPath);
+          // var i;
+          // for(i=0; i < this.errors.length; i++){
+          //   console.log(this.errors[i]);
+          //   this.$toasted.error(this.errors[i]).goAway(2000);
+          // }
+          //set Uri
+          this.$store.commit('setUri', this.url);
+          this.$toasted.success(' Parsing Url ').goAway(1500);
+          var parser = new imageparser();
+          parser.runCrawl();
+        
       },
-      validUrl: function (url) {
+      validUrl (url) {
           var re = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
         return re.test(url);
       },
