@@ -10,28 +10,27 @@
                 </div>
                 <div class="card-body">
 
-                    <form id="edit-project" class="form-horizontal col-md-12 fv-form fv-form-bootstrap" role="form" data-fv-framework="bootstrap" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh" novalidate="novalidate">
-                    
-                    <div class="form-group">
-                        <label class="control-label col-sm-5" for="inputUrl">URL to parse </label>
-                        <div class="col-sm-7">
-                            <input v-model="url" class="col-lg-12" name="url" placeholder="https://www.example.com" type="text" value="">
-                        </div>
-                    </div>
-                  <div class="form-group">
-                        <button type="button" @click="directory" class="btn btn-default ">Save Images Dir</button>
-                        
-                        <div class="col-sm-12">
-                            <p>Directory: {{getDirectory}}</p>
-                        </div>
-                    </div>
-                  <hr>
-                        <div class="form-group">
-                            <div class="col-sm-offset-0 col-sm-2">
-                                <button id="edit-project-save" type="button" class="btn btn-default" @click="run">Run</button>
+                  <form id="edit-project" class="form-horizontal col-md-12 fv-form fv-form-bootstrap" role="form" data-fv-framework="bootstrap" data-fv-icon-valid="glyphicon glyphicon-ok" data-fv-icon-invalid="glyphicon glyphicon-remove" data-fv-icon-validating="glyphicon glyphicon-refresh" novalidate="novalidate">
+                      <div class="form-group row">
+                            <div class="col-sm-3">
+                              <label class="control-label" for="inputUrl">URL to parse </label>
                             </div>
-                        </div>
-                    </form>
+                            <div class="col-sm-6">
+                              <input v-model="url" class="" name="url" placeholder="https://www.example.com" type="text" value="" size="50">
+                            </div>
+                      </div>
+                      <hr>
+                      <div class="form-group">
+                            <p><button type="button" @click="directory" class="btn btn-default">Choose Directory</button></p>
+                            <p>Directory: {{getDirectory}}</p>
+                      </div>
+                      <hr>
+                      <div class="form-group">
+                          <div class="col-sm-offset-0 col-sm-2">
+                            <button id="edit-project-save" type="button" class="btn btn-default" @click="run">Run</button>
+                          </div>
+                      </div>
+                   </form>
                 </div>
             </div>
         </div>

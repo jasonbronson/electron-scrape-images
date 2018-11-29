@@ -22,7 +22,7 @@ export default class imageparser {
         this.dir = store.getters.getDirectoryPath.toString();
         //get the url to parse
         this.uri = store.getters.getUri.toString();
-
+        var imageList= [];
         var c = new Crawler({
             maxConnections : 10,
             // This will be called for each crawled page
@@ -33,32 +33,31 @@ export default class imageparser {
                     var $ = res.$;
                     // $ is Cheerio by default
                     //a lean implementation of core jQuery designed specifically for the server
-                    console.log($("title").text());
+                    console.log('*' + $("title").text());
+                    const cheerio = require('cheerio');
+                    const $ = cheerio.load(res.body);
+                    const url = res.options.uri;
+                    $('img').each(function(i, elem) {
+                        var src = $(this).attr('src');
+                        //console.log(src);
                         
-                    if(error){
-                        console.log(error);
-                    }else{
-                        const cheerio = require('cheerio');
-                        const $ = cheerio.load(res.body);
-                        const url = res.options.uri;
-                        $('img').each(function(i, elem) {
-                            var src = $(this).attr('src');
-                            
-                            if (!/^https?:\/\//i.test(src)) {
+                        if (src.length > 0 ) {
+                            if(!/^https?:\/\//i.test(src) && !/^data:image/i.test(src)){
                                 src = url + src;
+                                //console.log('**' + src);
                             }
-                            if(!/^https?:\/\//i.test(src)){
-                                console.log( src );
-                            }
-                            
-                        });
-                    }      
+                            imageList.push(src);
+                        }
+                        
+                    });
+                        
             
                 }
                 done();
             }
         });
 
+        console.log(imageList);
 
         // Queue URLs with custom callbacks & parameters
         c.queue([{
