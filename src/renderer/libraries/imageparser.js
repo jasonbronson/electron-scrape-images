@@ -58,6 +58,10 @@ export default class imageparser {
         });
 
         console.log(imageList);
+        var a;
+        for(a=0; a < imageList.length; a++){
+            electronDl.download(window, imageList[a].toString());
+        }
 
         // Queue URLs with custom callbacks & parameters
         c.queue([{

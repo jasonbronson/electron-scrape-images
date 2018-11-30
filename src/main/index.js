@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Menu } from 'electron'
 
+require('electron-dl')();
 
 /**
  * Set `__static` path to static files in production
