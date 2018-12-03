@@ -1,12 +1,15 @@
 //https://www.npmjs.com/package/crawler
 import Crawler from 'crawler';
-import store from '../store'
+import store from '../store';
+const {ipcMain} = require('electron');
+
 export default class imageparser {
 
     constructor(){
         var Crawler = require("crawler");
         var url;
         var dir;
+        
     }
     set uri(value){
         this.url = value;
@@ -19,7 +22,7 @@ export default class imageparser {
     }
     runCrawl(){
 
-        this.dir = store.getters.getDirectoryPath.toString();
+        
         //get the url to parse
         this.uri = store.getters.getUri.toString();
         var imageList= [];
@@ -50,18 +53,13 @@ export default class imageparser {
                         }
                         
                     });
-                        
+                    var imageParser = new imageparser();
+                    imageParser.downloadImageList(imageList);    
             
                 }
                 done();
             }
         });
-
-        console.log(imageList);
-        var a;
-        for(a=0; a < imageList.length; a++){
-            electronDl.download(window, imageList[a].toString());
-        }
 
         // Queue URLs with custom callbacks & parameters
         c.queue([{
@@ -71,6 +69,62 @@ export default class imageparser {
         }]);
 
 
+    }
+    downloadImageList(imageList){
+        
+        var a;
+        for(a=0; a < imageList.length; a++){
+            this.dir = store.getters.getDirectoryPath.toString();
+            var fileURL = imageList[a].toString();
+            var filePath = this.dir + '/' + fileURL.substring(fileURL.lastIndexOf('/') + 1);
+            
+            //Remove query strings from filename
+            var pattern = new RegExp("/\?/i");
+            if(pattern.test(filePath)){
+                //console.log('******' + filePath);
+                //filePath = filePath.substring(0, filePath.lastIndexOf('?') );
+            }
+            console.log(filePath);
+            this.downloadFile(fileURL, filePath);
+        }
+    }
+    downloadFile(file_url , targetPath){
+        console.log(file_url + ' ' + targetPath);
+        // Save variable to know progress
+        var received_bytes = 0;
+        var total_bytes = 0;
+        var request = require('request');
+        var fs = require('fs');
+
+        var req = request({
+            "rejectUnauthorized": false, 
+            "followRedirect": true,
+            method: 'GET',
+            uri: file_url
+        });
+    
+        var out = fs.createWriteStream(targetPath);
+        req.pipe(out);
+    
+        req.on('response', function ( data ) {
+            // Change the total bytes value to get progress later.
+            total_bytes = parseInt(data.headers['content-length' ]);
+        });
+    
+        req.on('data', function(chunk) {
+            // Update the received bytes
+            received_bytes += chunk.length;   
+            //this.showProgress(received_bytes, total_bytes);
+        });
+    
+        req.on('end', function() {
+            //alert("File succesfully downloaded");
+        });
+    }
+    
+    showProgress(received,total){
+        var percentage = (received * 100) / total;
+        console.log(percentage + "% | " + received + " bytes out of " + total + " bytes.");
     }
 
 

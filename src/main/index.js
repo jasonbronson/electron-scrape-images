@@ -1,6 +1,5 @@
 import { app, BrowserWindow, Menu } from 'electron'
 
-require('electron-dl')();
 
 /**
  * Set `__static` path to static files in production
@@ -35,6 +34,10 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  
+
+
 }
 
 app.on('ready', createWindow)

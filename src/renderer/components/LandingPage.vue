@@ -47,7 +47,7 @@ const {dialog} = require('electron').remote
     name: 'landing-page',
     data() {
       return {
-        url: "https://cr.dev",
+        url: "https://crawlmonster.com",
         version: ".01"
       }
     },
