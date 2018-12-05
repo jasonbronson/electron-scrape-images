@@ -29,7 +29,7 @@ export default class imageparser {
         var c = new Crawler({
             maxConnections : 10,
             // This will be called for each crawled page
-            callback : function (error, res, done) {
+            callback : (error, res, done) => {
                 if(error){
                     console.log(error);
                 }else{
@@ -53,8 +53,9 @@ export default class imageparser {
                         }
                         
                     });
-                    var imageParser = new imageparser();
-                    imageParser.downloadImageList(imageList);    
+                    //var imageParser = new imageparser();
+                    //imageParser.downloadImageList(imageList);
+                    this.downloadImageList(imageList);
             
                 }
                 done();
